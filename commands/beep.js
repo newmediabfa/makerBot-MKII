@@ -1,7 +1,10 @@
+const Discord = require('discord.js');
+
 module.exports = {
-	name: 'beep',
-	description: 'Beep!',
-	execute(message, args) {
-		message.channel.send('Boop.');
-	}
+	data: new Discord.SlashCommandBuilder()
+		.setName('beep')
+		.setDescription('Replies with Boop!'),
+	async execute(interaction) {
+		await interaction.reply('Boop!');
+	},
 };
