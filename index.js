@@ -1,11 +1,10 @@
 const Discord = require('discord.js');
-
 const fs = require('node:fs');
 const path = require('node:path');
 // const { Client, Collection, GatewayIntentBits } = require('discord.js');
-
-const makerRoles = require('./roles.json');
-const channels = require('./channels.json');
+//
+// const makerRoles = require('./roles.json');
+// const channels = require('./channels.json');
 
 const bot = new Discord.Client({ intents: [Discord.GatewayIntentBits.Guilds] });
 
