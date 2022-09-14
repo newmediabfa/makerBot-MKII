@@ -10,15 +10,23 @@ const channels = require('./channels.json');
 const bot = new Discord.Client({ intents: [Discord.GatewayIntentBits.Guilds] });
 
 bot.commands = new Discord.Collection();
-
-const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
 for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
+	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
-	commands.push(command.data.toJSON());
+	bot.commands.set(command.data.name, command);
 }
+
+// const commands = [];
+// const commandsPath = path.join(__dirname, 'commands');
+// const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+// for (const file of commandFiles) {
+//   const filePath = path.join(commandsPath, file);
+// 	const command = require(filePath);
+// 	commands.push(command.data.toJSON());
+// }
 
 bot.once('ready', () => {
 	console.log('Ready!');
