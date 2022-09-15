@@ -1,6 +1,10 @@
-const Discord = require('discord.js');
+PROGRAM_MSG_IDconst Discord = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
+
+const PROGRAM_MSG_ID = '752931046852657333';
+const PRONOUN_MSG_ID = '752931046244221028';
+const YEAR_MSG_ID = '752931047489929256';
 
 const bot = new Discord.Client({
 	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions],
@@ -64,9 +68,7 @@ bot.login(process.env.BOT_TOKEN);
 // const Test_HERE = '692054748274098276'
 //
 // // this is the id of the msg the bot sends to react to
-// const Program_msg_id = '752931046852657333';
-// const Pronoun_msg_id = '752931046244221028';
-// const Year_msg_id = '752931047489929256';
+
 //
 //
 //
@@ -168,7 +170,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   if (reaction.message.partial){
     try{
       let msg = await reaction.message.fetch();
-      if(msg.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
+      if(msg.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
         console.log("Cached.");
         applyRole();
       }
@@ -179,7 +181,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   }
   else{
     //console.log("Not a partial.");
-    if(reaction.message.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
+    if(reaction.message.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
       applyRole();
     }
   }
@@ -260,7 +262,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 //   if (reaction.message.partial){
 //     try{
 //       let msg = await reaction.message.fetch();
-//       if(msg.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
+//       if(msg.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === ){
 //         console.log("Cached.");
 //         removeRole();
 //       }
@@ -271,7 +273,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 //   }
 //   else{
 //     //console.log("Not a partial.");
-//     if(reaction.message.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
+//     if(reaction.message.id === Program_msg_id || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
 //       removeRole();
 //     }
 //   }
