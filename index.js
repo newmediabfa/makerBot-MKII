@@ -28,11 +28,12 @@ bot.once('ready', () => {
 });
 
 bot.on('interactionCreate', async interaction => {
+	console.log("early interaction create");
 	if (!interaction.isChatInputCommand()) return;
-
+	console.log("Begin creating commands");
   const command = interaction.client.commands.get(interaction.commandName);
   if (!command) return;
-
+	console.log("creating commands...");
 	try {
 		await command.execute(interaction);
 	} catch (error) {
@@ -97,7 +98,9 @@ bot.login(process.env.BOT_TOKEN);
 // });
 //
 bot.on('messageReactionAdd', async (reaction, user) => {
+	console.log("before not partial test");
 	if(!reaction.partial) return;
+	console.log("message reaction  add");
 
   let applyRole = async () => {
     let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
