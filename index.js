@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-// const { Client, Collection, GatewayIntentBits } = require('discord.js');
-//
-// const makerRoles = require('./roles.json');
-// const channels = require('./channels.json');
+const channels = require('channels.json');
 
-const bot = new Discord.Client({ intents: [Discord.GatewayIntentBits.Guilds] });
+const bot = new Discord.Client({
+	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions],
+ 	partials:[Discord.Partials.Message, Discord.Partials.Channel, Discord.Partials.Reaction],
+});
 
 bot.commands = new Discord.Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -17,15 +17,6 @@ for (const file of commandFiles) {
 	const command = require(filePath);
 	bot.commands.set(command.data.name, command);
 }
-
-// const commands = [];
-// const commandsPath = path.join(__dirname, 'commands');
-// const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-// for (const file of commandFiles) {
-//   const filePath = path.join(commandsPath, file);
-// 	const command = require(filePath);
-// 	commands.push(command.data.toJSON());
-// }
 
 bot.once('ready', () => {
 	console.log('Ready!');
@@ -102,96 +93,98 @@ bot.login(process.env.BOT_TOKEN);
 //   console.log(member.user.username + " has joined the server!");
 // });
 //
-// bot.on('messageReactionAdd', async (reaction, user) => {
-//   let applyRole = async () => {
-//     let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
-//     let emojiName = reaction.emoji.name;
-//     console.log(emojiName);
-//     let role;
-//     if(emojiName === '⚡'){
-//       role = makerRoles.New_Media;
-//     }
-//     if(emojiName === '⚽'){
-//       role = makerRoles.Sport_Media;
-//     }
-//     if(emojiName === '🎥'){
-//       role = makerRoles.Media_Prod;
-//     }
-//     if(emojiName === '🎙'){
-//       role = makerRoles.Masters;
-//     }
-//     if(emojiName === '🐏'){
-//       role = makerRoles.Not_In_RTA;
-//     }
-//     if(emojiName === '❤️'){
-//       role = makerRoles.Other;
-//     }
-//     if(emojiName === '🧡'){
-//       role = makerRoles.Any;
-//     }
-//     if(emojiName === '💛'){
-//       role = makerRoles.None;
-//     }
-//     if(emojiName === '💚'){
-//       role = makerRoles.They;
-//     }
-//     if(emojiName === '💙'){
-//       role = makerRoles.He;
-//     }
-//     if(emojiName === '💜'){
-//       role = makerRoles.She;
-//     }
-//     if(emojiName === '1️⃣'){
-//       role = makerRoles.First;
-//     }
-//     if(emojiName === '2️⃣'){
-//       role = makerRoles.Second;
-//     }
-//     if(emojiName === '3️⃣'){
-//       role = makerRoles.Third;
-//     }
-//     if(emojiName === '4️⃣'){
-//       role = makerRoles.Fourth;
-//     }
-//     if(emojiName === '#️⃣'){
-//       role = makerRoles.Beyond;
-//     }
-//     if(emojiName === '💾'){
-//       role = makerRoles.Old_Median;
-//     }
-//     if(emojiName === '⏳'){
-//       role = makerRoles.Alumni;
-//     }
-//
-//     try{
-//       if (role && member){
-//         console.log("Role and member found");
-//         await member.roles.add(role);
-//       }
-//     }
-//     catch(err){
-//       console.log(err);
-//     }
-//   }
-//   if (reaction.message.partial){
-//     try{
-//       let msg = await reaction.message.fetch();
-//       if(msg.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
-//         console.log("Cached.");
-//         applyRole();
-//       }
-//     }
-//     catch(err){
-//       console.log(err);
-//     }
-//   }
-//   else{
-//     //console.log("Not a partial.");
-//     if(reaction.message.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
-//       applyRole();
-//     }
-//   }
-// });
+bot.on('messageReactionAdd', async (reaction, user) => {
+	if(!reaction.partial) return;
+	
+  let applyRole = async () => {
+    let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
+    let emojiName = reaction.emoji.name;
+    console.log(emojiName);
+    let role;
+    if(emojiName === '⚡'){
+      role = makerRoles.New_Media;
+    }
+    if(emojiName === '⚽'){
+      role = makerRoles.Sport_Media;
+    }
+    if(emojiName === '🎥'){
+      role = makerRoles.Media_Prod;
+    }
+    if(emojiName === '🎙'){
+      role = makerRoles.Masters;
+    }
+    if(emojiName === '🐏'){
+      role = makerRoles.Not_In_RTA;
+    }
+    if(emojiName === '❤️'){
+      role = makerRoles.Other;
+    }
+    if(emojiName === '🧡'){
+      role = makerRoles.Any;
+    }
+    if(emojiName === '💛'){
+      role = makerRoles.None;
+    }
+    if(emojiName === '💚'){
+      role = makerRoles.They;
+    }
+    if(emojiName === '💙'){
+      role = makerRoles.He;
+    }
+    if(emojiName === '💜'){
+      role = makerRoles.She;
+    }
+    if(emojiName === '1️⃣'){
+      role = makerRoles.First;
+    }
+    if(emojiName === '2️⃣'){
+      role = makerRoles.Second;
+    }
+    if(emojiName === '3️⃣'){
+      role = makerRoles.Third;
+    }
+    if(emojiName === '4️⃣'){
+      role = makerRoles.Fourth;
+    }
+    if(emojiName === '#️⃣'){
+      role = makerRoles.Beyond;
+    }
+    if(emojiName === '💾'){
+      role = makerRoles.Old_Median;
+    }
+    if(emojiName === '⏳'){
+      role = makerRoles.Alumni;
+    }
+
+    try{
+      if (role && member){
+        console.log("Role and member found");
+        await member.roles.add(role);
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  if (reaction.message.partial){
+    try{
+      let msg = await reaction.message.fetch();
+      if(msg.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
+        console.log("Cached.");
+        applyRole();
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  else{
+    //console.log("Not a partial.");
+    if(reaction.message.id === Program_msg_id || reaction.message.id === Pronoun_msg_id || reaction.message.id === Year_msg_id){
+      applyRole();
+    }
+  }
+});
 //
 // //remove reactions
 // bot.on('messageReactionRemove', async (reaction, user) => {
