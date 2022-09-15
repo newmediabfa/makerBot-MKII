@@ -99,6 +99,7 @@ bot.login(process.env.BOT_TOKEN);
 //
 bot.on('messageReactionAdd', async (reaction, user) => {
 	console.log("before not partial test");
+	if(!roles) console.log("-> roles not loaded");
 	if(!reaction.partial) return;
 	console.log("message reaction  add");
 
