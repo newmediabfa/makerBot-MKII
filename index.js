@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-const channels = require('channels.json');
 
 const bot = new Discord.Client({
 	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions],
@@ -95,7 +94,7 @@ bot.login(process.env.BOT_TOKEN);
 //
 bot.on('messageReactionAdd', async (reaction, user) => {
 	if(!reaction.partial) return;
-	
+
   let applyRole = async () => {
     let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
     let emojiName = reaction.emoji.name;
