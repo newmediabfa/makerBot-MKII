@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const PROGRAM_MSG_ID = '752931046852657333';
-const PRONOUN_MSG_ID = '752931046244221028';
-const YEAR_MSG_ID = '752931047489929256';
-
-const roles = require('./roles.json');
+// const PROGRAM_MSG_ID = '752931046852657333';
+// const PRONOUN_MSG_ID = '752931046244221028';
+// const YEAR_MSG_ID = '752931047489929256';
+//
+// const roles = require('./roles.json');
 
 const bot = new Discord.Client({
 	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions],
@@ -97,101 +97,101 @@ bot.login(process.env.BOT_TOKEN);
 //   console.log(member.user.username + " has joined the server!");
 // });
 //
-bot.on('messageReactionAdd', async (reaction, user) => {
-	console.log("before not partial test");
-	if(!roles) console.log("-> roles not loaded");
-	if(!reaction.partial) return;
-	console.log("message reaction  add");
-
-  let applyRole = async () => {
-    let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
-    let emojiName = reaction.emoji.name;
-    console.log(emojiName);
-    let role;
-    if(emojiName === '⚡'){
-      role = roles.New_Media;
-    }
-    if(emojiName === '⚽'){
-      role = roles.Sport_Media;
-    }
-    if(emojiName === '🎥'){
-      role = roles.Media_Prod;
-    }
-    if(emojiName === '🎙'){
-      role = roles.Masters;
-    }
-    if(emojiName === '🐏'){
-      role = roles.Not_In_RTA;
-    }
-    if(emojiName === '❤️'){
-      role = roles.Other;
-    }
-    if(emojiName === '🧡'){
-      role = roles.Any;
-    }
-    if(emojiName === '💛'){
-      role = roles.None;
-    }
-    if(emojiName === '💚'){
-      role = roles.They;
-    }
-    if(emojiName === '💙'){
-      role = roles.He;
-    }
-    if(emojiName === '💜'){
-      role = roles.She;
-    }
-    if(emojiName === '1️⃣'){
-      role = roles.First;
-    }
-    if(emojiName === '2️⃣'){
-      role = roles.Second;
-    }
-    if(emojiName === '3️⃣'){
-      role = roles.Third;
-    }
-    if(emojiName === '4️⃣'){
-      role = roles.Fourth;
-    }
-    if(emojiName === '#️⃣'){
-      role = roles.Beyond;
-    }
-    if(emojiName === '💾'){
-      role = roles.Old_Median;
-    }
-    if(emojiName === '⏳'){
-      role = roles.Alumni;
-    }
-
-    try{
-      if (role && member){
-        console.log("Role and member found");
-        await member.roles.add(role);
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
-  if (reaction.message.partial){
-    try{
-      let msg = await reaction.message.fetch();
-      if(msg.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
-        console.log("Cached.");
-        applyRole();
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
-  else{
-    //console.log("Not a partial.");
-    if(reaction.message.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
-      applyRole();
-    }
-  }
-});
+// bot.on('messageReactionAdd', async (reaction, user) => {
+// 	console.log("before not partial test");
+// 	if(!roles) console.log("-> roles not loaded");
+// 	if(!reaction.partial) return;
+// 	console.log("message reaction  add");
+//
+//   let applyRole = async () => {
+//     let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
+//     let emojiName = reaction.emoji.name;
+//     console.log(emojiName);
+//     let role;
+//     if(emojiName === '⚡'){
+//       role = roles.New_Media;
+//     }
+//     if(emojiName === '⚽'){
+//       role = roles.Sport_Media;
+//     }
+//     if(emojiName === '🎥'){
+//       role = roles.Media_Prod;
+//     }
+//     if(emojiName === '🎙'){
+//       role = roles.Masters;
+//     }
+//     if(emojiName === '🐏'){
+//       role = roles.Not_In_RTA;
+//     }
+//     if(emojiName === '❤️'){
+//       role = roles.Other;
+//     }
+//     if(emojiName === '🧡'){
+//       role = roles.Any;
+//     }
+//     if(emojiName === '💛'){
+//       role = roles.None;
+//     }
+//     if(emojiName === '💚'){
+//       role = roles.They;
+//     }
+//     if(emojiName === '💙'){
+//       role = roles.He;
+//     }
+//     if(emojiName === '💜'){
+//       role = roles.She;
+//     }
+//     if(emojiName === '1️⃣'){
+//       role = roles.First;
+//     }
+//     if(emojiName === '2️⃣'){
+//       role = roles.Second;
+//     }
+//     if(emojiName === '3️⃣'){
+//       role = roles.Third;
+//     }
+//     if(emojiName === '4️⃣'){
+//       role = roles.Fourth;
+//     }
+//     if(emojiName === '#️⃣'){
+//       role = roles.Beyond;
+//     }
+//     if(emojiName === '💾'){
+//       role = roles.Old_Median;
+//     }
+//     if(emojiName === '⏳'){
+//       role = roles.Alumni;
+//     }
+//
+//     try{
+//       if (role && member){
+//         console.log("Role and member found");
+//         await member.roles.add(role);
+//       }
+//     }
+//     catch(err){
+//       console.log(err);
+//     }
+//   }
+//   if (reaction.message.partial){
+//     try{
+//       let msg = await reaction.message.fetch();
+//       if(msg.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
+//         console.log("Cached.");
+//         applyRole();
+//       }
+//     }
+//     catch(err){
+//       console.log(err);
+//     }
+//   }
+//   else{
+//     //console.log("Not a partial.");
+//     if(reaction.message.id === PROGRAM_MSG_ID || reaction.message.id === PRONOUN_MSG_ID || reaction.message.id === YEAR_MSG_ID){
+//       applyRole();
+//     }
+//   }
+// });
 //
 // //remove reactions
 // bot.on('messageReactionRemove', async (reaction, user) => {
