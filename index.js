@@ -3,8 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const bot = new Discord.Client({
-	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions],
- 	// partials:[Discord.Partials.Message, Discord.Partials.Channel, Discord.Partials.Reaction],
+	intents: [Discord.GatewayIntentBits.Guilds],
 });
 
 bot.commands = new Discord.Collection();
