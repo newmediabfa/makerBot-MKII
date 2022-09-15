@@ -6,6 +6,8 @@ const PROGRAM_MSG_ID = '752931046852657333';
 const PRONOUN_MSG_ID = '752931046244221028';
 const YEAR_MSG_ID = '752931047489929256';
 
+const roles = require('./roles.json');
+
 const bot = new Discord.Client({
 	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildMessageReactions],
  	partials:[Discord.Partials.Message, Discord.Partials.Channel, Discord.Partials.Reaction],
@@ -103,58 +105,58 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     console.log(emojiName);
     let role;
     if(emojiName === '⚡'){
-      role = makerRoles.New_Media;
+      role = roles.New_Media;
     }
     if(emojiName === '⚽'){
-      role = makerRoles.Sport_Media;
+      role = roles.Sport_Media;
     }
     if(emojiName === '🎥'){
-      role = makerRoles.Media_Prod;
+      role = roles.Media_Prod;
     }
     if(emojiName === '🎙'){
-      role = makerRoles.Masters;
+      role = roles.Masters;
     }
     if(emojiName === '🐏'){
-      role = makerRoles.Not_In_RTA;
+      role = roles.Not_In_RTA;
     }
     if(emojiName === '❤️'){
-      role = makerRoles.Other;
+      role = roles.Other;
     }
     if(emojiName === '🧡'){
-      role = makerRoles.Any;
+      role = roles.Any;
     }
     if(emojiName === '💛'){
-      role = makerRoles.None;
+      role = roles.None;
     }
     if(emojiName === '💚'){
-      role = makerRoles.They;
+      role = roles.They;
     }
     if(emojiName === '💙'){
-      role = makerRoles.He;
+      role = roles.He;
     }
     if(emojiName === '💜'){
-      role = makerRoles.She;
+      role = roles.She;
     }
     if(emojiName === '1️⃣'){
-      role = makerRoles.First;
+      role = roles.First;
     }
     if(emojiName === '2️⃣'){
-      role = makerRoles.Second;
+      role = roles.Second;
     }
     if(emojiName === '3️⃣'){
-      role = makerRoles.Third;
+      role = roles.Third;
     }
     if(emojiName === '4️⃣'){
-      role = makerRoles.Fourth;
+      role = roles.Fourth;
     }
     if(emojiName === '#️⃣'){
-      role = makerRoles.Beyond;
+      role = roles.Beyond;
     }
     if(emojiName === '💾'){
-      role = makerRoles.Old_Median;
+      role = roles.Old_Median;
     }
     if(emojiName === '⏳'){
-      role = makerRoles.Alumni;
+      role = roles.Alumni;
     }
 
     try{
